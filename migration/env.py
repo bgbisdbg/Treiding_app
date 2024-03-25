@@ -8,7 +8,7 @@ from alembic import context
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 from config import *
-from models.models import metadata
+from auth.models import metadata
 
 
 config = context.config
