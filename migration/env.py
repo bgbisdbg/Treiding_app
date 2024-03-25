@@ -5,14 +5,18 @@ from sqlalchemy import pool
 
 from alembic import context
 
+import os
+import sys
+
+sys.path.append(os.path.join(sys.path[0], 'src'))
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
-from config import *
-from auth.models import metadata
-
+from src.config import *
+from src.auth.models import metadata as auth_metadata
+from src.operation.models import metadata as operation_metadata
 
 config = context.config
-
 
 section = config.config_ini_section
 config.set_section_option(section, 'DB_HOST', DB_HOST)
@@ -30,7 +34,8 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = metadata
+target_metadata = [operation_metadata, auth_metadata]
+
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
